@@ -1,0 +1,14 @@
+%%[
+  VAR @firstName, @loyaltyPoints, @tier
+  SET @firstName = AttributeValue("FirstName")
+  SET @loyaltyPoints = AttributeValue("Points")
+  
+  IF @loyaltyPoints >= 1000 THEN
+    SET @tier = "Gold"
+  ELSE
+    SET @tier = "Silver"
+  ENDIF
+]%%
+
+Hello %%=v(@firstName)=%%,  
+You are a valued %%=v(@tier)=%% member with %%=v(@loyaltyPoints)=%% points!
