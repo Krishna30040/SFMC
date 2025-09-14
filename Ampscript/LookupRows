@@ -1,0 +1,30 @@
+<h2>Your Order Items</h2>
+<ul>
+%%[
+var @orderId, @rows, @row, @rowCount, @i
+
+set @orderId = AttributeValue("OrderId")
+set @rows = LookupRows("Orders","OrderId", @orderId)
+set @rowCount = rowcount(@rows)
+
+if @rowCount > 0 then
+
+  for @i = 1 to @rowCount do
+
+   var @name, @value
+   set @row = row(@rows, @i)
+   set @name = field(@row,"Name")
+   set @value = field(@row,"Value")
+
+]%%
+
+   <li>%%=v(@name)=%%, $%%=v(@value)=%%</li>
+
+   %%[ next @i ]%%
+
+%%[ else ]%%
+
+   <li>No items ordered</li>
+
+%%[ endif ]%%
+</ul>
